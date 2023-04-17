@@ -13,6 +13,8 @@ const {
  } = require("../middleware/verifyToken");
 
 postRoute.post("/addPost", verifyToken, post.addPost);
+postRoute.get("/find/:id", verifyToken, post.getOnePost);
+postRoute.put("/:id", verifyToken, post.updatePost);
   
 
 module.exports = postRoute
