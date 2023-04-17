@@ -16,6 +16,7 @@ postRoute.post("/addPost", verifyToken, post.addPost);
 postRoute.get("/find/:id", verifyToken, post.getOnePost);
 postRoute.put("/:id", verifyToken, post.updatePost);
 postRoute.get("/", verifyToken, post.reallAll);
+postRoute.delete("/:id", verifyToken, post.deletePost);
   
 
 module.exports = postRoute

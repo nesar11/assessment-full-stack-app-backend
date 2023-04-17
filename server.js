@@ -2,6 +2,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const cors = require('cors');
+const morgan = require('morgan');
 
 const config = require('./config/DB');
 const userRoute = require('./routes/userRoute');
@@ -25,7 +26,7 @@ let corsOptions = {
   origin: '*',
   optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
 }
-
+app.use(morgan('dev'));
 app.use(cors(corsOptions))
 app.use('/users', userRoute);
 app.use('/posts', postRoute);
