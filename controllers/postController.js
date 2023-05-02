@@ -1,5 +1,4 @@
-const Post = require('../models/Post')
-
+const Post = require('../models/Post');
 
 // Add post
 exports.addPost = async (req, res) => {
@@ -11,7 +10,7 @@ exports.addPost = async (req, res) => {
   } catch (err) {
     res.status(500).json(err);
   }
-}
+};
 // Read one post
 exports.getOnePost = async (req, res) => {
   try {
@@ -20,7 +19,18 @@ exports.getOnePost = async (req, res) => {
   } catch (err) {
     res.status(500).json(err);
   }
-}
+};
+
+exports.searchPost = async (req, res) => {
+  console.log(req.params.key);
+  let data = await Post.find({
+    $or: [
+      { title: { $regex: req.params.key } },
+      { description: { $regex: req.params.key } },
+    ],
+  });
+  res.send(data);
+};
 
 //update post
 exports.updatePost = async (req, res) => {
@@ -40,21 +50,19 @@ exports.updatePost = async (req, res) => {
 
 // read all post
 exports.reallAll = async (req, res) => {
-
   try {
     const post = await Post.find({});
     res.status(200).json(post);
   } catch (err) {
     res.status(500).json(err);
-
-  };
-}
+  }
+};
 // delete post
 
 exports.deletePost = async (req, res) => {
   try {
     await Post.findByIdAndDelete(req.params.id);
-    res.status(200).json("post has been deleted...");
+    res.status(200).json('post has been deleted...');
   } catch (err) {
     res.status(500).json(err);
   }

@@ -8,6 +8,7 @@ router.get('/', user.authMiddleware, user.allUser);
 router.delete('/:id', user.authMiddleware, user.deleteOne);
 router.put('/update/:id', user.authMiddleware, user.updateUser);
 router.get('/view/:id', user.authMiddleware, user.readOne);
-router.post('/login', user.login);
+router.get('/view/:id', user.authMiddleware, user.readOne);
+router.get('/search/:key', user.searchUser);
 
 module.exports = router;

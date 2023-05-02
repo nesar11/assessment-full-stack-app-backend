@@ -82,6 +82,16 @@ exports.newUser = async (req, res) => {
   }
 };
 
+exports.searchUser = async (req, res) => {
+  console.log(req.params.key);
+  let data = await User.find({
+    $or: [
+      { username: { $regex: req.params.key } },
+      { email: { $regex: req.params.key } },
+    ],
+  });
+  res.send(data);
+};
 exports.updateUser = async (req, res) => {
   try {
     const updatedUser = await User.findByIdAndUpdate(
@@ -107,7 +117,7 @@ exports.readOne = async (req, res) => {
 
 exports.allUser = async (req, res) => {
   try {
-    const userData = await User.find({});
+    const userData = await User.find({}).sort({ updatedAt: -1 });
     res.status(200).json(userData);
   } catch (err) {
     res.status(500).json(err);
