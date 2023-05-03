@@ -1,5 +1,6 @@
 const Post = require('../models/Post');
-
+const multer = require('multer');
+const mongoose = require('mongoose');
 // Add post
 exports.addPost = async (req, res) => {
   const newPost = new Post(req.body);
@@ -10,6 +11,25 @@ exports.addPost = async (req, res) => {
   } catch (err) {
     res.status(500).json(err);
   }
+};
+
+exports.createPost = (req, res, next) => {
+  // console.log(req.file);
+  const url = req.protocol + '://' + req.get('host');
+  const post = new Post({
+    title: req.body.title,
+    description: req.body.description,
+    image: url + '/' + req.file.path,
+  });
+  post
+    .save()
+    .then((post) => {
+      res.status(200).json({ post });
+      // console.log(post);
+    })
+    .catch((err) => {
+      res.status(400).send(' Unable to save the database');
+    });
 };
 // Read one post
 exports.getOnePost = async (req, res) => {
