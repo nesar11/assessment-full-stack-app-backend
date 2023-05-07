@@ -9,6 +9,8 @@ const config = require('./config/DB');
 const userRoute = require('./routes/userRoute');
 const postRoute = require('./routes/postRoute');
 
+require('dotenv').config();
+
 const PORT = process.env.PORT || 8000;
 
 mongoose.Promise = global.Promise;

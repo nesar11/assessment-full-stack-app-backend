@@ -1,7 +1,7 @@
 const User = require('../models/User');
 const env = require('../config/DB');
 const jwt = require('jsonwebtoken');
-
+const nodemailer = require('../middleware/userMail');
 exports.register = function (req, res) {
   const { username, email, password, passwordConfirmation } = req.body;
   if (!email || !password) {
@@ -32,6 +32,7 @@ exports.register = function (req, res) {
         }
         return res.status(200).json({ registered: true });
       });
+      nodemailer.sendConfirmationEmail(user.username, user.email);
     }
   });
 };
