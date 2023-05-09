@@ -8,6 +8,7 @@ const fs = require('fs');
 const config = require('./config/DB');
 const userRoute = require('./routes/userRoute');
 const postRoute = require('./routes/postRoute');
+const productRoute = require('./routes/productRoute');
 
 require('dotenv').config();
 
@@ -74,8 +75,9 @@ let corsOptions = {
 app.use(morgan('dev'));
 app.use(requestLogger);
 app.use(cors(corsOptions));
-app.use('/users', userRoute);
-app.use('/posts', postRoute);
+app.use('/api/users', userRoute);
+app.use('/api/posts', postRoute);
+app.use('/api/products', productRoute);
 
 app.listen(PORT, () => {
   console.log(`Server is running on PORT ${PORT}`);

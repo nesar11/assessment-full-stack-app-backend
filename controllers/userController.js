@@ -2,8 +2,10 @@ const User = require('../models/User');
 const env = require('../config/DB');
 const jwt = require('jsonwebtoken');
 const nodemailer = require('../middleware/userMail');
+
 exports.register = function (req, res) {
   const { username, email, password, passwordConfirmation } = req.body;
+  const token = jwt.sign({ email: req.body.email }, process.env.secret);
   if (!email || !password) {
     return res.status(422).json({ error: 'Please provide email or password' });
   }

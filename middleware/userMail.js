@@ -1,8 +1,6 @@
 require('dotenv').config();
 const nodemailer = require('nodemailer');
 
-// const user = 'nu2933440@gmail.com';
-// const pass = 'zjiqdiskbvnmilot';
 const user = process.env.USER;
 const pass = process.env.PASS;
 
