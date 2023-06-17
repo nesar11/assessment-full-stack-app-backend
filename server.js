@@ -16,7 +16,7 @@ const PORT = process.env.PORT || 8000;
 
 mongoose.Promise = global.Promise;
 mongoose.set('strictQuery', false);
-mongoose.connect(config.DB).then(
+mongoose.connect(process.env.DB_URL).then(
   () => {
     console.log('Database is connected');
   },

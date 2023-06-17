@@ -27,8 +27,8 @@ exports.createProduct = (req, res, next) => {
   product
     .save()
     .then((product) => {
-      res.status(200).json(product);
-      console.log(product);
+      res.status(200).json({ product });
+      // console.log(product);
     })
     .catch((err) => {
       res.status(400).send(err);
