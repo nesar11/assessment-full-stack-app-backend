@@ -5,7 +5,7 @@ const cors = require('cors');
 const morgan = require('morgan');
 const fs = require('fs');
 
-const config = require('./config/DB');
+// const config = require('./config/DB');
 const userRoute = require('./routes/userRoute');
 const postRoute = require('./routes/postRoute');
 const productRoute = require('./routes/productRoute');
